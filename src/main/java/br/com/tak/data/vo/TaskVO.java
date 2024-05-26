@@ -2,6 +2,8 @@ package br.com.tak.data.vo;
 
 import br.com.tak.domain.enuns.Status;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -11,8 +13,12 @@ public class TaskVO implements Serializable {
 
     @JsonProperty("id")
     private Long key;
+
     private String title;
+
     private String description;
+
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     public TaskVO() {}
