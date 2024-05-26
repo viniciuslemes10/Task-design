@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/task/v1")
 public class TaskController {
@@ -24,5 +26,10 @@ public class TaskController {
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public TaskVO listTask(@PathVariable Long id) {
         return service.listTask(id);
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<TaskVO> getAllTasks() {
+        return service.listAllTask();
     }
 }
