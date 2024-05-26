@@ -1,41 +1,40 @@
-package br.com.tak.domain;
+package br.com.tak.data.vo;
 
 import br.com.tak.domain.enuns.Status;
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
-@Table(name = "task")
-public class Task implements Serializable {
+public class TaskVO implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+
+    @JsonProperty("id")
+    private Long key;
     private String title;
     private String description;
     private Status status;
 
-    public Task() {}
+    public TaskVO() {}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Task task)) return false;
-        return Objects.equals(id, task.id) && Objects.equals(title, task.title) && Objects.equals(description, task.description) && status == task.status;
+        if (!(o instanceof TaskVO taskVO)) return false;
+        return Objects.equals(key, taskVO.key) && Objects.equals(title, taskVO.title) && Objects.equals(description, taskVO.description) && status == taskVO.status;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description, status);
+        return Objects.hash(key, title, description, status);
     }
 
-    public Long getId() {
-        return id;
+    public Long getKey() {
+        return key;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setKey(Long key) {
+        this.key = key;
     }
 
     public String getTitle() {
