@@ -32,4 +32,15 @@ public class TaskController {
     public List<TaskVO> getAllTasks() {
         return service.listAllTask();
     }
+
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public TaskVO updateTask(@RequestBody TaskVO vo) {
+        return service.update(vo);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

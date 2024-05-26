@@ -33,4 +33,24 @@ public class TaskService {
         var list = Mapper.parseListObject(repository.findAll(), TaskVO.class);
         return list;
     }
+
+    public TaskVO update(TaskVO vo) {
+        if(vo == null) throw new ResourceObjectIsNotNullException();
+
+        var entity = repository.findById(vo.getKey()).orElseThrow(() ->
+                new ResourceNotFoundException("No records found for this ID!"));
+
+        entity.setTitle(vo.getTitle());
+        entity.setDescription(vo.getDescription());
+        entity.setStatus(vo.getStatus());
+
+        var voUpdate = Mapper.parseObject(repository.save(entity), TaskVO.class);
+        return voUpdate;
+    }
+
+    public void delete(Long id) {
+        var task = repository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("No records found for this ID!"));
+        repository.delete(task);
+    }
 }
